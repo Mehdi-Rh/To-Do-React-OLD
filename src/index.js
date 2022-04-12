@@ -1,13 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter as Router } from "react-router-dom"
 import './App.css';
 import reportWebVitals from './reportWebVitals';
 import TodoContainer from "./components/TodoContainer"
 
 ReactDOM.render(
+
   <>
-    <TodoContainer />
+    <Router>
+      <TodoContainer />
+
+    </Router>
   </>,
+
   document.getElementById('root')
 );
 

@@ -1,33 +1,45 @@
 import React from 'react'
-import { useState } from 'react'
-
+import { useState, useEffect } from 'react'
+import { Routes ,Route } from 'react-router-dom';
 import Header from './Header'
+import Navbar from "./Navbar"
 import InputTodo from './InputTodo'
 import TodosList from './TodosList'
 import { v4 as uuidv4 } from "uuid"
+import About from "../pages/About"
+import NotMatch from "../pages/NotMatch"
+import { BrowserRouter as Router } from "react-router-dom"
 
 
 
 const TodoContainer = () => {
-  const[todos, setTodos] = useState(
-    [
-      {
-        id: uuidv4(),
-        title: "Setup development environment",
-        completed: false
-      },
-      {
-        id: uuidv4(),
-        title: "Develop website and add content",
-        completed: false
-      },
-      {
-        id: uuidv4(),
-        title: "Deploy to live server",
-        completed: false
-      }
-    ]
-  )
+
+  const getInitialTodos = () => {
+    // getting stored items
+    const temp = localStorage.getItem("todos")
+    const savedTodos = JSON.parse(temp)
+    return savedTodos || []
+  }
+
+  const[todos, setTodos] = useState(getInitialTodos())
+
+  useEffect(() => {
+    console.log("test run")
+  
+    // getting stored items
+    const temp = localStorage.getItem("todos")
+    const loadedTodos = JSON.parse(temp)
+  
+    if (loadedTodos) {
+      setTodos(loadedTodos)
+    }
+  }, [setTodos])
+
+  useEffect(() => {
+    // storing todos items
+    const temp = JSON.stringify(todos)
+    localStorage.setItem("todos", temp)
+  }, [todos])
 
   // useEffect(() => {})
 
@@ -66,18 +78,27 @@ const TodoContainer = () => {
   }
 
   return (
-    <div className="container">
-      <div className="inner">
-        <Header />
-        <InputTodo addTodoProps={addTodoItem}/>
-        <TodosList 
-          todosProp={todos} 
-          handleChangeProps={handleChange}
-          deleteTodoProps={delTodo}
-          setUpdateProps={setUpdate}
-        />
-      </div>
-    </div>
+    <Routes>
+      <Route exact path="/" element={        
+        <div className="container">
+          <div className="inner">
+            <Header />
+            <InputTodo addTodoProps={addTodoItem}/>
+            <TodosList 
+              todosProp={todos} 
+              handleChangeProps={handleChange}
+              deleteTodoProps={delTodo}
+              setUpdateProps={setUpdate}
+            />
+          </div>
+        </div>
+      }
+      />
+      <Route path="/about" element={<About />}/>
+      <Route path="*" element={<NotMatch />}/>
+
+    </Routes>
+
 
   )
 

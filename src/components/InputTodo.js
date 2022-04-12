@@ -2,19 +2,20 @@ import React from 'react'
 import { useState } from 'react'
 
 const InputTodo = (props) => {
-  const [newTodo, setNewTodo] = useState({
-    title: ""
-  } )
+  const [title, setTitle] = useState("")
 
   const onChange = e => {
-    const newTitle = {[e.target.name] : e.target.value} 
-    setNewTodo(newTitle)
+    setTitle(e.target.value)
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    props.addTodoProps(newTodo.title.trim())
-    setNewTodo({title:""})
+    if (title.trim()) {
+      props.addTodoProps(title)
+      setTitle("")
+    } else {
+      alert("Please write item")
+    }
   }
 
   return (
@@ -23,7 +24,7 @@ const InputTodo = (props) => {
         type="text" 
         className="input-text"
         placeholder="Add a new task" 
-        value={newTodo.title} 
+        value={title} 
         onChange={onChange} 
         name="title"/>
       <button className="input-submit">Submit</button>
