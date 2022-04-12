@@ -18,14 +18,27 @@ Additional description about the project and its features.
 
 ### Setup
 
-- Clone the repository: 
-  "git clone git@github.com:Mehdi-Rh/To-Do-React.git"
+Clone the repository: 
+<br>
+```
+git clone git@github.com:Mehdi-Rh/To-Do-React.git
+```
 
-- Access the folder
-- Install packages
-  "npm i"
-- Run the app 
-  "npm start"
+Access the folder
+<br>
+
+Install packages
+<br>
+```
+npm i
+```
+<br>
+
+Run the app 
+<br>
+```
+npm start
+```
 
 ## Authors
 
