@@ -12,6 +12,7 @@ const TodosList = (props) => {
       completed={i.completed} 
       handleChangeProps={props.handleChangeProps}
       deleteTodoProps={props.deleteTodoProps}
+      setUpdateProps={props.setUpdateProps}
     />);
 
   return (

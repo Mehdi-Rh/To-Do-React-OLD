@@ -55,6 +55,16 @@ const TodoContainer = () => {
     setTodos([...todos, newTodo])
   }
 
+  const setUpdate = (updatedTitle, id) => {
+    const updateTodo = todos.map(todo => {
+      if (todo.id === id) {
+          todo.title = updatedTitle
+      }
+      return todo
+    })
+    setTodos(updateTodo) 
+  }
+
   return (
     <div className="container">
       <div className="inner">
@@ -64,6 +74,7 @@ const TodoContainer = () => {
           todosProp={todos} 
           handleChangeProps={handleChange}
           deleteTodoProps={delTodo}
+          setUpdateProps={setUpdate}
         />
       </div>
     </div>
